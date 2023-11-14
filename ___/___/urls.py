@@ -15,12 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path, include
 
 from app.views import view
 
+from app_notification import views as notification_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', view, name='base'),
+
+    # app_notification paths.
+    path('notify/', notification_views.notify, name="notify"),
+    re_path(r'^webpush/', include('webpush.urls')),
 ]
