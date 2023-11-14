@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from os import getenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'app',
+
+    'webpush'
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,10 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Webpush notification settings.
+WEBPUSH_SETTINGS = {
+    "VAPID_PUBLIC_KEY": getenv('VAPID_PUBLIC_KEY'),
+    "VAPID_PRIVATE_KEY": getenv('VAPID_PRIVATE_KEY'),
+    "VAPID_ADMIN_EMAIL": getenv('VAPID_ADMIN_EMAIL')
+}
